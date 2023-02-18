@@ -10,7 +10,7 @@
                         @php
                             $id = Auth::user()->id;
                             $adminData = App\Models\User::find($id);
-                            // $totalProducts = App\Models\Product::count();
+                            $products = App\Models\Product::all();
                         @endphp
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -32,7 +32,23 @@
                         </div>
                         <div class="col-md-2">
                             <select class="form-control" id="" name="variant">
-                                <option>Choose Varient</option>
+                                <option selected>-- Select a variant --</option>
+                                <optgroup label="Color">
+                                    <option value="red">Red</option>
+                                    <option value="black">Black</option>
+                                    <option value="green">Green</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="XL">XL</option>
+                                    <option value="L">L</option>
+                                    <option value="SM">SM</option>
+                                </optgroup>
+                                <optgroup label="Style">
+                                    <option value="v-nick">v-nick</option>
+                                    <option value="o-nick">o-nick</option>
+                                </optgroup>
+                            </select>
+
                             </select>
                         </div>
 
@@ -70,33 +86,34 @@
                             </thead>
 
                             <tbody>
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <td>{{ $product->id }}</td>
+                                        <td>{{ $product->title }} <br> {{ $product->created_at }}</td>
+                                        <td>{{ $product->description }}</td>
+                                        <td>
+                                            <dl class="row mb-0" id="variant" style="height: 80px; overflow: hidden">
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>T-Shirt <br> Created at : 25-Aug-2020</td>
-                                    <td>Quality product in low cost</td>
-                                    <td>
-                                        <dl class="row mb-0" id="variant" style="height: 80px; overflow: hidden">
-
-                                            <dt class="col-sm-3 pb-0">
-                                                SM/ Red/ V-Nick
-                                            </dt>
-                                            <dd class="col-sm-9">
-                                                <dl class="row mb-0">
-                                                    <dt class="col-sm-4 pb-0">Price : {{ number_format(200, 2) }}</dt>
-                                                    <dd class="col-sm-8 pb-0">InStock : {{ number_format(50, 2) }}</dd>
-                                                </dl>
-                                            </dd>
-                                        </dl>
-                                        <button class="btn btn-sm btn-link"
-                                            onclick="$('#variant').toggleClass('h-auto')">Show more</button>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <a class="btn btn-success" href="#">Edit</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                <dt class="col-sm-3 pb-0">
+                                                    SM/ Red/ V-Nick
+                                                </dt>
+                                                <dd class="col-sm-9">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-4 pb-0">Price : {{ number_format(200, 2) }}</dt>
+                                                        <dd class="col-sm-8 pb-0">InStock : {{ number_format(50, 2) }}</dd>
+                                                    </dl>
+                                                </dd>
+                                            </dl>
+                                            <button class="btn btn-sm btn-link"
+                                                onclick="$('#variant').toggleClass('h-auto')">Show more</button>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a class="btn btn-success" href="#">Edit</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
 
