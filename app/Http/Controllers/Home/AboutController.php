@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Home;
 
 use App\Models\About;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Education;
 use App\Models\Skills;
 use App\Models\Training;
 use Intervention\Image\Facades\Image;
+use App\Http\Controllers\Controller;
 
 class AboutController extends Controller
 {
